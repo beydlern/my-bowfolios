@@ -11,6 +11,7 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import Profiles from '../pages/Profiles';
+import Lucky from '../pages/Lucky';
 import Projects from '../pages/Projects';
 import Interests from '../pages/Interests';
 import Home from '../pages/Home';
@@ -29,6 +30,7 @@ const App = () => (
         <Route path="/signout" element={<SignOut />} />
         <Route path="/interests" element={<Interests />} />
         <Route path="/profiles" element={<Profiles />} />
+        <Route path="/lucky" element={<Lucky />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/filter" element={<ProtectedRoute><Filter /></ProtectedRoute>} />

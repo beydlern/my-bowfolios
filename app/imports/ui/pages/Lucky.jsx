@@ -3,16 +3,15 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
-import { Profiles } from '../../api/profiles/Profiles';
-import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
-import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
-import { Projects } from '../../api/projects/Projects';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
 import ProfileCard from '../components/ProfileCard';
+import { Profiles } from '../../api/profiles/Profiles';
+import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
+import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
+import { Projects } from '../../api/projects/Projects';
 
-/* Returns the Profile and associated Projects and Interests associated with the passed user email. */
 function getProfileData(email) {
   const data = Profiles.collection.findOne({ email });
   const interests = _.pluck(ProfilesInterests.collection.find({ profile: email }).fetch(), 'interest');
@@ -22,7 +21,7 @@ function getProfileData(email) {
 }
 
 /* Renders the Profile Collection as a set of Cards. */
-const ProfilesPage = () => {
+const LuckyPage = () => {
 
   const { ready } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
@@ -41,10 +40,10 @@ const ProfilesPage = () => {
   return ready ? (
     <Container id={PageIDs.profilesPage} style={pageStyle}>
       <Row xs={1} md={2} lg={4} className="g-2">
-        {profileData.map((profile, index) => <ProfileCard key={index} profile={profile} />)}
+        <ProfileCard profile={_.sample(profileData)} />
       </Row>
     </Container>
   ) : <LoadingSpinner />;
 };
 
-export default ProfilesPage;
+export default LuckyPage;
